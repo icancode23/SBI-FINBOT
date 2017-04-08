@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context="com.example.nipunarora.finbot.Activities.Bot_Activity"
     android:background="@drawable/bot_back">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/botImage"
+        android:background="@drawable/businessman"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"/>
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
