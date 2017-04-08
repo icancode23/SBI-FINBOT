@@ -22,13 +22,10 @@ public class ChatMultiLayoutRecyclerAdapter extends RecyclerView.Adapter<Recycle
     ArrayList<Object> chat_object_list;
     /********************** DECLARE CODES FOR ALL KINDS OF Chat Objects ************/
 
-    /*************************** CODES FOR OBJECTS BASED ON SOURCE(INCOMING/OUTGOING)*****************/
+    /*********************** CODES FOR OBJECTS BASED ON VIEW TYPE **********/
+
     private static final int MESSAGE_TEXT_INCOMING=0;
     private static final int MESSAGE_TEXT_OUTGOING=1;
-
-    /********************************************/
-
-    /*********************** CODES FOR OBJECTS BASED ON VIEW TYPE **********/
 
 
     /****************************************/
