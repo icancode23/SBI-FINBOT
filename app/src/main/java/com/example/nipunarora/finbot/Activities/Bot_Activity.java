@@ -1,5 +1,6 @@
 package com.example.nipunarora.finbot.Activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -31,7 +32,8 @@ public class Bot_Activity extends AppCompatActivity implements View.OnClickListe
         switch(v.getId())
         {
             case R.id.voice:
-                Toast.makeText(this,"Voice Button cLicked",Toast.LENGTH_SHORT).show();
+                Intent i =new Intent(this,Voice_Bot.class);
+                startActivity(i);
                 break;
             case R.id.textit:
                 Toast.makeText(this,"Text Button cLicked",Toast.LENGTH_SHORT).show();

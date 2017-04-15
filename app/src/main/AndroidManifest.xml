@@ -20,7 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.Voice_Bot"></activity>
+        <activity android:name=".Activities.Voice_Bot"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
