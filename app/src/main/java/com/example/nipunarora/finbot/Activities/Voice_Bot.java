@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.nipunarora.finbot.Fragments.ATMCreditWallet;
 import com.example.nipunarora.finbot.Fragments.IntroVoiceBot;
+import com.example.nipunarora.finbot.Fragments.SpendingReview;
 import com.example.nipunarora.finbot.R;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public class Voice_Bot extends AppCompatActivity implements TextToSpeech.OnInitL
             }
         });
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.voiceBotFrame,new ATMCreditWallet(),"hey").commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.voiceBotFrame,new SpendingReview(),"hey").commit();
     }
 
 
