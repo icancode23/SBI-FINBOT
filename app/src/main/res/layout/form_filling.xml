@@ -4,19 +4,20 @@
     android:layout_height="match_parent">
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:id="@+id/intro"
         android:text="You can fill the home finance form \n as shown in the image below"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:textColor="#FFFFFF"
         android:textAlignment="center"
         android:layout_marginTop="10dp"
         />
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4"
+        android:layout_height="500dp"
+        android:layout_marginTop="10dp"
+
+        android:src="@drawable/form_fill"
         />
 
 </LinearLayout>
