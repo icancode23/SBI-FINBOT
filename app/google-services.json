@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1014218899311",
+    "firebase_url": "https://finbot-2ad8f.firebaseio.com",
+    "project_id": "finbot-2ad8f",
+    "storage_bucket": "finbot-2ad8f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1014218899311:android:a93525cf0b78dabe",
+        "android_client_info": {
+          "package_name": "com.example.nipunarora.finbot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1014218899311-840vi4dlb05j459r4kfehtvimaadmc9p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoNEcH_6YhMwkRSpyp4C-x0VdP-Y-7qug"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

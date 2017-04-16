@@ -14,6 +14,7 @@ import com.example.nipunarora.finbot.R;
 public class Bot_Activity extends AppCompatActivity implements View.OnClickListener {
     FrameLayout input;
     CardView voice_input,text_input;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
