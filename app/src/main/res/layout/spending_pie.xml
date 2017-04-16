@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/intro"
-        android:text="Your Spending \n for last month"
+        android:text="Your Spending for the Day \n You spent Rs 4410 today"
         android:textSize="25sp"
         android:textColor="#FFFFFF"
         android:textAlignment="center"
