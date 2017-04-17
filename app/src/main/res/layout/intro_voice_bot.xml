@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/intro"
         android:text="What can I help \n you with ?"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:textColor="#FFFFFF"
         android:textAlignment="center"
         android:layout_marginTop="10dp"
