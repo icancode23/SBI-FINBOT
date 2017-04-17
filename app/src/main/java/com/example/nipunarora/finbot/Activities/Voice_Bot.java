@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.nipunarora.finbot.Fragments.ATMCreditWallet;
 import com.example.nipunarora.finbot.Fragments.FormFilling;
+import com.example.nipunarora.finbot.Fragments.GeneralResponse;
 import com.example.nipunarora.finbot.Fragments.IntroVoiceBot;
 import com.example.nipunarora.finbot.Fragments.SpendingReview;
 import com.example.nipunarora.finbot.R;
@@ -36,8 +37,14 @@ public class Voice_Bot extends AppCompatActivity implements TextToSpeech.OnInitL
                 listen();
             }
         });
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.voiceBotFrame,new FormFilling(),"hey").commit();
+        GeneralResponse g=new GeneralResponse();
+        Bundle args=new Bundle();
+        args.putBoolean("Image",true);
+        args.putBoolean("morequery",true);
+        args.putInt("imgdrawable",R.drawable.invest);
+        args.putString("moretext","Other Options include: \n Mutual Funds \n Reccuring Deposits \n Fixed Deposits");
+        g.setArguments(args);
+        getSupportFragmentManager().beginTransaction().replace(R.id.voiceBotFrame,g,"hey").commit();
     }
 
 
