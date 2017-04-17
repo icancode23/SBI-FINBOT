@@ -36,6 +36,8 @@ public class GeneralResponse extends Fragment {
         Log.d("General Reponse","The Arguements received are:"+ args.toString());
         Boolean img= args.getBoolean("Image");
         Boolean more=args.getBoolean("morequery");
+        TextView intro=(TextView)rootview.findViewById(R.id.intro);
+        intro.setText(args.getString("intro"));
         if (img)
         {
             ImageView imgholder=(ImageView)rootview.findViewById(R.id.imageContent);
@@ -50,6 +52,7 @@ public class GeneralResponse extends Fragment {
             moretext.setVisibility(View.VISIBLE);
             moretext.setText(args.getString("moretext"));
         }
+
 
     }
 }

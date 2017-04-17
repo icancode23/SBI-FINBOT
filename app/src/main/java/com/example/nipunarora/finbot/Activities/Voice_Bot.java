@@ -37,12 +37,16 @@ public class Voice_Bot extends AppCompatActivity implements TextToSpeech.OnInitL
                 listen();
             }
         });
+
+        //**************** TESTING FRAGMENTS **********//
         GeneralResponse g=new GeneralResponse();
         Bundle args=new Bundle();
-        args.putBoolean("Image",true);
-        args.putBoolean("morequery",true);
-        args.putInt("imgdrawable",R.drawable.invest);
-        args.putString("moretext","Other Options include: \n Mutual Funds \n Reccuring Deposits \n Fixed Deposits");
+        args.putBoolean("Image",false);
+        args.putBoolean("morequery",false);
+       /* args.putInt("imgdrawable",R.drawable.invest);
+        args.putString("moretext","Other Options include: \n Mutual Funds \n Reccuring Deposits \n Fixed Deposits");*/
+        /*args.putString("intro","You should primarily look \n to invest in Forex(USD)");*/
+        args.putString("intro","You have 80% chances of getting \n a home loan \n this was calculated using the \n behaviour score");
         g.setArguments(args);
         getSupportFragmentManager().beginTransaction().replace(R.id.voiceBotFrame,g,"hey").commit();
     }
