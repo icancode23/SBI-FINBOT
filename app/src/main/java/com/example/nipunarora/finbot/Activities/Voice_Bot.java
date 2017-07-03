@@ -1,6 +1,7 @@
 package com.example.nipunarora.finbot.Activities;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
@@ -10,22 +11,41 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.nipunarora.finbot.Asynctasks.NLPAsyncTask;
 import com.example.nipunarora.finbot.Fragments.ATMCreditWallet;
 import com.example.nipunarora.finbot.Fragments.FormFilling;
 import com.example.nipunarora.finbot.Fragments.GeneralResponse;
 import com.example.nipunarora.finbot.Fragments.IntroVoiceBot;
 import com.example.nipunarora.finbot.Fragments.SpendingReview;
+import com.example.nipunarora.finbot.Interfaces.AsyncTaskMailer;
 import com.example.nipunarora.finbot.R;
+import com.google.gson.JsonElement;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
-public class Voice_Bot extends AppCompatActivity implements TextToSpeech.OnInitListener{
+import ai.api.AIListener;
+import ai.api.AIServiceException;
+import ai.api.android.AIConfiguration;
+import ai.api.android.AIDataService;
+import ai.api.model.AIError;
+import ai.api.model.AIRequest;
+import ai.api.model.AIResponse;
+import ai.api.model.Metadata;
+import ai.api.model.Result;
+import ai.api.model.Status;
+
+public class Voice_Bot extends AppCompatActivity implements TextToSpeech.OnInitListener,AIListener,AsyncTaskMailer{
     ImageView start_voice;
     TextToSpeech tts;
     HashMap<String,String> voicereplies;
     private static final int SPEECH_REQUEST_CODE = 0;
+    static String TAG="VoiceBotActivity";
+    String spech;
+    AIDataService aiDataService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +61,15 @@ public class Voice_Bot extends AppCompatActivity implements TextToSpeech.OnInitL
                 
             }
         });
+
+        final AIConfiguration config = new AIConfiguration(getResources().getString(R.string.client_access_token),
+                AIConfiguration.SupportedLanguages.English,
+                AIConfiguration.RecognitionEngine.System);
+
+         aiDataService = new AIDataService(this,config);
+
+        final AIRequest aiRequest = new AIRequest();
+        aiRequest.setQuery("Kaisa hai bhai");
         //**************** Loading Intro Fragment **********//
 
         getSupportFragmentManager().beginTransaction().replace(R.id.voiceBotFrame,new IntroVoiceBot(),"hey").commitAllowingStateLoss();
@@ -78,6 +107,53 @@ public class Voice_Bot extends AppCompatActivity implements TextToSpeech.OnInitL
         }
 
     }
+
+    @Override
+    public void onResult(AIResponse result) {
+        final Status status = result.getStatus();
+        Log.i(TAG, "Status code: " + status.getCode());
+        Log.i(TAG, "Status type: " + status.getErrorType());
+        //
+        Log.i(TAG, "Resolved query: " + result.getResult().getResolvedQuery());
+        //
+        final Result result_1 = result.getResult();
+        Log.i(TAG, "Action: " + result_1.getAction());
+        //
+        final String speech = result_1.getFulfillment().getSpeech();
+        Log.i(TAG, "Speech: " + speech);
+        //
+        final Metadata metadata = result_1.getMetadata();
+        if (metadata != null) {
+            Log.i(TAG, "Intent id: " + metadata.getIntentId());
+            Log.i(TAG, "Intent name: " + metadata.getIntentName());
+        }
+        //
+        final HashMap<String, JsonElement> params = result_1.getParameters();
+        if (params != null && !params.isEmpty()) {
+            Log.i(TAG, "Parameters: ");
+            for (final Map.Entry<String, JsonElement> entry : params.entrySet()) {
+                Log.i(TAG, String.format("%s: %s", entry.getKey(), entry.getValue().toString()));
+            }
+        }
+    }
+
+    @Override
+    public void onError(final AIError error) {
+        Log.d("Api.ai Error",error.toString());
+    }
+
+    @Override
+    public void onListeningStarted() {}
+
+    @Override
+    public void onListeningCanceled() {}
+
+    @Override
+    public void onListeningFinished() {}
+
+    @Override
+    public void onAudioLevel(final float level) {}
+
     //************************************ end init **************************/
     //**************************************** I/O operations of Finbot ********************/
     public void listen() {
@@ -99,6 +175,11 @@ public class Voice_Bot extends AppCompatActivity implements TextToSpeech.OnInitL
 
     }
 
+    @Override
+    public void onReceiveMail(Object Mail) {
+        String reply=(String)Mail;
+        speakOut(reply);
+    }
     //****************************** Parsing Input Output **************************/
 
     // Get result from Speech Recognition activity
@@ -115,10 +196,12 @@ public class Voice_Bot extends AppCompatActivity implements TextToSpeech.OnInitL
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
-    //***************** Hardcoding user input analysis *******************/
+    
     void analyseUserInput(String current_query)
     {
-
+        AIRequest airequest1=new AIRequest();
+        airequest1.setQuery(current_query);
+        new NLPAsyncTask(aiDataService,this).execute(airequest1);
         if (current_query.equals("what was my spending for the day"))
         {
             speakOut(voicereplies.get("Spending"));

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">FinBot</string>
     <string name="Rs">\u20B9</string>
+    <string name="client_access_token">043b9d1caca94c10b496ca9b6bf81ab6</string>
 </resources>
