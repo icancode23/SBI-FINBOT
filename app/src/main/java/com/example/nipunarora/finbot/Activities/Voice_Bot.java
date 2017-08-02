@@ -69,7 +69,7 @@ public class Voice_Bot extends AppCompatActivity implements TextToSpeech.OnInitL
          aiDataService = new AIDataService(this,config);
 
         final AIRequest aiRequest = new AIRequest();
-        aiRequest.setQuery("Kaisa hai bhai");
+
         //**************** Loading Intro Fragment **********//
 
         getSupportFragmentManager().beginTransaction().replace(R.id.voiceBotFrame,new IntroVoiceBot(),"hey").commitAllowingStateLoss();
@@ -199,9 +199,7 @@ public class Voice_Bot extends AppCompatActivity implements TextToSpeech.OnInitL
     
     void analyseUserInput(String current_query)
     {
-        AIRequest airequest1=new AIRequest();
-        airequest1.setQuery(current_query);
-        new NLPAsyncTask(aiDataService,this).execute(airequest1);
+
         if (current_query.equals("what was my spending for the day"))
         {
             speakOut(voicereplies.get("Spending"));
@@ -231,8 +229,9 @@ public class Voice_Bot extends AppCompatActivity implements TextToSpeech.OnInitL
                                 showGraphics(5);
                             }
                             else {
-                                Toast.makeText(this, "Nothing Matched", Toast.LENGTH_SHORT).show();
-                                start_voice.setEnabled(Boolean.TRUE);
+                                AIRequest airequest1=new AIRequest();
+                                airequest1.setQuery(current_query);
+                                new NLPAsyncTask(aiDataService,this).execute(airequest1);
                             }
                         }
                     }
